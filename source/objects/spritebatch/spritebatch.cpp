@@ -90,7 +90,7 @@ int SpriteBatch::Add(Quad* quad, const Matrix4& matrix, int index)
     };
     // clang-format on
 
-    matrix.TransformXY(std::span(vertices, textureVertices.size()), textureVertices);
+    matrix.TransformXY(std::span(vertices, textureVertices.size()), textureVertices, 1);
 
     for (size_t index = 0; index < textureVertices.size(); index++)
     {

@@ -681,7 +681,7 @@ void Font::Render(Graphics<>& graphics, const Matrix4& transform,
         const auto count = command.count;
 
         std::memcpy(drawCommand.Vertices().get(), &vertices[start], drawCommand.size);
-        matrix.TransformXY(drawCommand.GetVertices(), std::span(&vertices[start], count));
+        matrix.TransformXY(drawCommand.GetVertices(), std::span(&vertices[start], count), 1);
 
         Renderer<Console::Which>::Instance().Render(drawCommand);
     }

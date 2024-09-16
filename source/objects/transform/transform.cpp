@@ -73,7 +73,7 @@ void Transform::SetTransformation(float x, float y, float a, float sx, float sy,
 Vector2 Transform::TransformPoint(Vector2 point) const
 {
     Vector2 result;
-    this->matrix.TransformXY(std::views::single(result), std::views::single(point));
+    this->matrix.TransformXY(std::views::single(result), std::views::single(point), 1);
 
     return result;
 }
@@ -81,7 +81,7 @@ Vector2 Transform::TransformPoint(Vector2 point) const
 Vector2 Transform::InverseTransformPoint(Vector2 point)
 {
     Vector2 result;
-    this->GetInverseMatrix().TransformXY(std::views::single(result), std::views::single(point));
+    this->GetInverseMatrix().TransformXY(std::views::single(result), std::views::single(point), 1);
 
     return result;
 }

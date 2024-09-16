@@ -330,7 +330,7 @@ void Texture<Console::CAFE>::Draw(Graphics<Console::CAFE>& graphics, Quad* quad,
 
     if (is2D)
         transform.TransformXY(std::span(command.Positions().get(), command.count),
-                              std::span(quad->GetVertexPositions(), command.count));
+                              std::span(quad->GetVertexPositions(), command.count), 1);
 
     const auto* textureCoords = quad->GetVertexTextureCoords();
     command.FillVertices(graphics.GetColor(), textureCoords);

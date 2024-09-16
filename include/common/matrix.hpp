@@ -116,32 +116,16 @@ namespace love
 
         template<VectorAtLeast2TransformRange Vdst, VectorAtLeast2TransformRange Vsrc>
         /* transform Vector2 src into Vector2 dst */
-        void TransformXY(Vdst&& dst, Vsrc&& src) const
+        void TransformXY(Vdst&& dst, Vsrc&& src, int size) const
         {
-            if constexpr (std::is_same_v<std::remove_cvref_t<std::ranges::range_value_t<Vdst>>,
-                                         vertex::Vertex> ||
-                          std::is_same_v<std::remove_cvref_t<std::ranges::range_value_t<Vsrc>>,
-                                         vertex::Vertex>)
+            for (int i = 0; i < size; i++)
             {
-                TransformXY(DeVertexize(dst), DeVertexize(src));
-                return;
-            }
-            else
-            {
-                // This might need to be an assert; jury's out
-                // static_assert(std::ranges::size(dst) == std::ranges::size(src));
+                // Store in temp variables in case src = dst
+                float x = (e[0]*src[i].x) + (e[4]*src[i].y) + (0) + (e[12]);
+                float y = (e[1]*src[i].x) + (e[5]*src[i].y) + (0) + (e[13]);
 
-                for (size_t i = 0; i < std::ranges::size(dst); i++)
-                {
-                    float x = (this->matrix[0] * src[i].x) + (this->matrix[4] * src[i].y) + (0) +
-                              (this->matrix[12]);
-
-                    float y = (this->matrix[1] * src[i].x) + (this->matrix[5] * src[i].y) + (0) +
-                              (this->matrix[13]);
-
-                    dst[i].x = x;
-                    dst[i].y = y;
-                }
+                dst[i].x = x;
+                dst[i].y = y;
             }
         }
 

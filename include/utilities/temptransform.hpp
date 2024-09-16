@@ -23,14 +23,14 @@ namespace love
         void TransformXY(vDst&& dst, vSrc&& src)
         {
             this->graphics->GetTransform().TransformXY(std::forward<decltype(dst)>(dst),
-                                                       std::forward<decltype(src)>(src));
+                                                       std::forward<decltype(src)>(src), 1);
         }
 
         template<typename vDst, typename vSrc>
         void TransformXYPure(vDst&& dst, vSrc&& src)
         {
             this->graphics->GetTransform().TransformXY(std::forward<decltype(dst)>(dst),
-                                                       std::forward<decltype(src)>(src));
+                                                       std::forward<decltype(src)>(src)), 1;
         }
 
         ~TempTransform()
