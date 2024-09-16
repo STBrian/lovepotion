@@ -849,7 +849,7 @@ namespace love
         {
             Vector2 result {};
             this->transformStack.back().TransformXY(std::views::single(result),
-                                                    std::views::single(point), 1);
+                                                    std::views::single(point));
 
             return result;
         }
@@ -858,7 +858,7 @@ namespace love
         {
             Vector2 result {};
             this->transformStack.back().Inverse().TransformXY(std::views::single(result),
-                                                              std::views::single(point), 1);
+                                                              std::views::single(point));
 
             return result;
         }
@@ -1170,7 +1170,7 @@ namespace love
 
                 if (is2D)
                     transform.TransformXY(std::span(command.Positions().get(), command.count),
-                                          points, 1);
+                                          points);
 
                 command.FillVertices(this->GetColor());
 
@@ -1401,7 +1401,7 @@ namespace love
             DrawCommand command(points.size(), vertex::PRIMITIVE_POINTS);
 
             if (is2D)
-                transform.TransformXY(std::span(command.Positions().get(), points.size()), points, 1);
+                transform.TransformXY(std::span(command.Positions().get(), points.size()), points);
 
             if (colors.size() > 1)
                 command.FillVertices(colors);

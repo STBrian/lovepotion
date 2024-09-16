@@ -340,7 +340,7 @@ void Texture<Console::CTR>::Draw(Graphics<Console::CTR>& graphics, Quad* quad,
     command.format  = CommonFormat::TEXTURE;
 
     if (is2D)
-        translated.TransformXY(std::span(command.Positions().get(), command.count), std::span(quad->GetVertexPositions(), command.count), 1);
+        translated.TransformXY(std::span(command.Positions().get(), command.count), std::span(quad->GetVertexPositions(), command.count));
 
     const auto* coords = quad->GetVertexTextureCoords();
     command.FillVertices(graphics.GetColor(), coords);

@@ -97,7 +97,7 @@ void TextBatch::AddTextData(const TextData& text)
     }
 
     if (text.useMatrix && !vertices.empty())
-        text.matrix.TransformXY(vertices, vertices, 1);
+        text.matrix.TransformXY(vertices, vertices);
 
     this->UploadVertices(vertices, vertexOffset);
 
@@ -228,7 +228,7 @@ void TextBatch::Draw(Graphics<Console::Which>& graphics, const Matrix4& matrix)
         drawCommand.handles = { command.texture };
 
         transform.TransformXY(std::span(drawCommand.Positions().get(), command.count),
-                              std::span(&this->buffer[command.start], command.count), 1);
+                              std::span(&this->buffer[command.start], command.count));
 
         drawCommand.FillVertices(&this->buffer[command.start]);
         Renderer<Console::Which>::Instance().Render(drawCommand);
