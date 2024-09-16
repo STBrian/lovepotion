@@ -1169,8 +1169,8 @@ namespace love
                 DrawCommand command(count, vertex::PRIMITIVE_TRIANGLE_FAN);
 
                 if (is2D)
-                    transform.TransformXY(std::span(command.Positions().get(), command.count, 1),
-                                          points);
+                    transform.TransformXY(std::span(command.Positions().get(), command.count),
+                                          points, 1);
 
                 command.FillVertices(this->GetColor());
 

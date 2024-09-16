@@ -30,7 +30,7 @@ namespace love
         void TransformXYPure(vDst&& dst, vSrc&& src)
         {
             this->graphics->GetTransform().TransformXY(std::forward<decltype(dst)>(dst),
-                                                       std::forward<decltype(src)>(src)), 1;
+                                                       std::forward<decltype(src)>(src), 1);
         }
 
         ~TempTransform()
