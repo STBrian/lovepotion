@@ -50,6 +50,9 @@ namespace love
         }
 
         static void Multiply(const Matrix4& a, const Matrix4& b, float t[0x10]);
+      
+      private:
+        float e[16];
 
       public:
         static void Multiply(const Matrix4& a, const Matrix4& b, Matrix4& result);
@@ -126,6 +129,31 @@ namespace love
 
                 dst[i].x = x;
                 dst[i].y = y;
+            }
+            if constexpr (std::is_same_v<std::remove_cvref_t<std::ranges::range_value_t<Vdst>>,
+                                         vertex::Vertex> ||
+                          std::is_same_v<std::remove_cvref_t<std::ranges::range_value_t<Vsrc>>,
+                                         vertex::Vertex>)
+            {
+                TransformXY(DeVertexize(dst), DeVertexize(src));
+                return;
+            }
+            else
+            {
+                // This might need to be an assert; jury's out
+                // static_assert(std::ranges::size(dst) == std::ranges::size(src));
+
+                for (size_t i = 0; i < std::ranges::size(dst); i++)
+                {
+                    float x = (this->matrix[0] * src[i].x) + (this->matrix[4] * src[i].y) + (0) +
+                              (this->matrix[12]);
+
+                    float y = (this->matrix[1] * src[i].x) + (this->matrix[5] * src[i].y) + (0) +
+                              (this->matrix[13]);
+
+                    dst[i].x = x;
+                    dst[i].y = y;
+                }
             }
         }
 
